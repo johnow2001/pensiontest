@@ -34,6 +34,8 @@ public class TestStepDefenitions {
     private YourDetailsPage details;
     private GetAdjustableIncomePage adjIncome;
     private WebDriverManager drvMan;
+    private EmployerListQuestionPage empList;
+    private IsYoutProviderListedPage listProvider;
 
     @Before
     public void before(){
@@ -153,6 +155,20 @@ public class TestStepDefenitions {
     public void checktaxFreeAmount(String expectedAmount){
         adjIncome = pMgr.getAdjustableIncomePage();
         assertTrue(adjIncome.checkTaxFreeAmount(expectedAmount));
+    }
+
+    @And("^I select answer \"([^\"]*)\" to employer list question$")
+    public void answerToEmployerList(String answer){
+        empList = pMgr.getEmpListpage();
+        empList.selecAnswer(answer);
+        empList.selectNextStep();
+    }
+
+    @And("^I select answer \"([^\"]*)\" to list of pension providers$")
+    public void anserToProviderList(String answer){
+        listProvider = pMgr.getProviderListPage();
+        listProvider.selecAnswer(answer);
+        listProvider.selectNextStep();
     }
 
     @After

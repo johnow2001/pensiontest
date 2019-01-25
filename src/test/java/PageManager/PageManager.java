@@ -17,7 +17,8 @@ public class PageManager {
     private CalendarBookingPage bookings;
     private YourDetailsPage details;
     private GetAdjustableIncomePage adjIncome;
-
+    private EmployerListQuestionPage emplListPage;
+    private IsYoutProviderListedPage listProvider;
 
     public PageManager(WebDriver driver) {
         this.driver = driver;
@@ -37,7 +38,7 @@ public class PageManager {
         return pensionType;
     }
 
-    public EmployerQuestionPage getEmployerQuestions(){
+    public EmployerQuestionPage getEmployerQuestions() {
         if (findType == null) {
             findType = new EmployerQuestionPage(this.driver);
         }
@@ -51,43 +52,57 @@ public class PageManager {
         return dcType;
     }
 
-    public BeforeYouBookPage getBeforeYouBookPage(){
-        if (beforeYouBook == null){
+    public BeforeYouBookPage getBeforeYouBookPage() {
+        if (beforeYouBook == null) {
             beforeYouBook = new BeforeYouBookPage(this.driver);
         }
         return beforeYouBook;
     }
 
-    public FindApptLocationPage getLocationPage(){
+    public FindApptLocationPage getLocationPage() {
         if (findLoc == null)
             findLoc = new FindApptLocationPage(this.driver);
-        return  findLoc;
+        return findLoc;
 
     }
 
-    public  ApptsLocationsNearYouPage getLocNearYou(){
+    public ApptsLocationsNearYouPage getLocNearYou() {
         if (apptsNearYou == null)
             apptsNearYou = new ApptsLocationsNearYouPage(this.driver);
         return apptsNearYou;
     }
 
-    public CalendarBookingPage getBookingsPage(){
+    public CalendarBookingPage getBookingsPage() {
         if (bookings == null)
             bookings = new CalendarBookingPage(this.driver);
         return bookings;
 
     }
 
-    public YourDetailsPage getDetailsPage(){
-        if(details == null)
+    public YourDetailsPage getDetailsPage() {
+        if (details == null)
             details = new YourDetailsPage(this.driver);
         return details;
     }
 
-    public GetAdjustableIncomePage getAdjustableIncomePage(){
-        if(adjIncome == null)
+    public GetAdjustableIncomePage getAdjustableIncomePage() {
+        if (adjIncome == null)
             adjIncome = new GetAdjustableIncomePage(this.driver);
         return adjIncome;
+    }
+
+    public EmployerListQuestionPage getEmpListpage() {
+        if (emplListPage == null) {
+            emplListPage = new EmployerListQuestionPage(this.driver);
+        }
+        return emplListPage;
+    }
+
+    public IsYoutProviderListedPage getProviderListPage() {
+        if (listProvider == null) {
+            listProvider = new IsYoutProviderListedPage(this.driver);
+        }
+        return listProvider;
     }
 
 
