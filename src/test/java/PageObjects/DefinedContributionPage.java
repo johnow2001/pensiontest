@@ -12,7 +12,10 @@ public class DefinedContributionPage {
 
     public DefinedContributionPage(WebDriver driver){
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver,
+                some-crap,
+                ,here,
+                this);
     }
 
     @FindBy(how = How.TAG_NAME, using = "h2")
