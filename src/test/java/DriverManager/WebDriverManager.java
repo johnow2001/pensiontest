@@ -3,13 +3,9 @@ package DriverManager;
 import FileReaderManager.FileReaderManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import FileReader.ConfigFileReader;
 import enums.DriverType;
-import FileReader.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
 
 public class WebDriverManager {
 
@@ -47,7 +43,9 @@ public class WebDriverManager {
         }
 
         Boolean maxSize = FileReaderManager.getInstance().getConfigReader().getWindowMaxSize();
-        if (maxSize) driver.manage().window().maximize();
+        if (maxSize) {
+            driver.manage().window().maximize();
+        }
         return driver;
 
     }

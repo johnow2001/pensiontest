@@ -54,7 +54,9 @@ public class ConfigFileReader {
 
     public DriverType getBrowserTye(){
         String browserType = properties.getProperty("browser");
-        if(browserType == null) throw new RuntimeException("getBrowserTye returned browser not found at " + properties);
+        if(browserType == null) {
+            throw new RuntimeException("getBrowserTye returned browser not found at " + propFilePath);
+        }
 
         if (browserType.toLowerCase().equals("chrome")) {
             return DriverType.CHROME;
@@ -66,7 +68,7 @@ public class ConfigFileReader {
             return DriverType.EDGE;
         }
         else{
-            throw new RuntimeException("Browser Type not found at " + properties);
+            throw new RuntimeException("Browser Type not found at " + propFilePath);
         }
     }
 
@@ -78,7 +80,9 @@ public class ConfigFileReader {
 
     public Boolean getWindowMaxSize(){
         String maxSize = properties.getProperty("windowMaxSize");
-        if(maxSize == null) throw new RuntimeException("windowMaxSize not found at " + properties );
+        if(maxSize == null) {
+            throw new RuntimeException("windowMaxSize not found at " + properties );
+        }
 
         return Boolean.valueOf(maxSize);
     }
