@@ -68,7 +68,8 @@ public class YourDetailsPage {
         String dobSplit[] = data.get(0).get("DOB").split("-");
         dobDay.sendKeys(dobSplit[0]);
         dobMonth.sendKeys(dobSplit[1]);
-        dobYear.sendKeys(dobSplit[2]);
+        dobYear.sendKeys( /*temp3 comment*/
+                dobSplit[2] /*temp comment*/);
 
         if(data.get(0).get("DCM question").equals("No")){
             dcPotNo.click();
