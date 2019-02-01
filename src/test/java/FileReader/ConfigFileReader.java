@@ -58,13 +58,13 @@ public class ConfigFileReader {
             throw new RuntimeException("getBrowserTye returned browser not found at " + propFilePath);
         }
 
-        if (browserType.toLowerCase().equals("chrome")) {
+        if (browserType.equalsIgnoreCase("chrome")) {
             return DriverType.CHROME;
         }
-        else if (browserType.toLowerCase().equals("firefox")){
+        else if (browserType.equalsIgnoreCase("firefox")){
             return DriverType.FIREFOX;
         }
-        else if (browserType.toLowerCase().equals("edge")){
+        else if (browserType.equalsIgnoreCase("edge")){
             return DriverType.EDGE;
         }
         else{
