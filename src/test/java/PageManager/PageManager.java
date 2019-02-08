@@ -19,6 +19,12 @@ public class PageManager {
     private GetAdjustableIncomePage adjIncome;
     private EmployerListQuestionPage emplListPage;
     private IsYoutProviderListedPage listProvider;
+    private CheckHowMuchInPotPage pot;
+    private StartFindPensionContactPage findPension;
+    private BeforeYouStartSearchPage before;
+    private TypeOfPensionYouAreLookingForPage lookFor;
+    private FindYourPensionProviderPage pensionProvider;
+    private SearchResultsPage results;
 
     public PageManager(WebDriver driver) {
         this.driver = driver;
@@ -105,5 +111,45 @@ public class PageManager {
         return listProvider;
     }
 
+    public CheckHowMuchInPotPage getPensionPotPage(){
+        if(pot == null){
+            pot = new CheckHowMuchInPotPage(this.driver);
+        }
+        return pot;
+    }
 
+    public  StartFindPensionContactPage getFindPensionContactPage(){
+        if (findPension == null){
+            findPension = new StartFindPensionContactPage(this.driver);
+        }
+        return findPension;
+    }
+
+    public BeforeYouStartSearchPage getBeforeYouStartSearchPage(){
+        if (before == null){
+            before = new BeforeYouStartSearchPage(this.driver);
+        }
+        return before;
+    }
+
+    public TypeOfPensionYouAreLookingForPage getTypeOfPensionYouAreLookingForPage(){
+        if (lookFor == null){
+            lookFor = new TypeOfPensionYouAreLookingForPage(this.driver);
+        }
+        return lookFor;
+    }
+
+    public FindYourPensionProviderPage getFindYourPensionProviderPage(){
+        if( pensionProvider ==null){
+            pensionProvider = new FindYourPensionProviderPage(this.driver);
+        }
+        return pensionProvider;
+    }
+
+    public SearchResultsPage getSearchResultsPage(){
+        if(results == null){
+            results = new SearchResultsPage(this.driver);
+        }
+        return results;
+    }
 }

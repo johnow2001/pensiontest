@@ -27,6 +27,9 @@ public class PensionWiseHomePage {
     @FindBy(how = How.LINK_TEXT, using = "Get an adjustable income")
     WebElement getAdjustIncome;
 
+    @FindBy(how = How.LINK_TEXT, using = "Check how much is in your pot")
+    WebElement yourPot;
+
     public void goToHomePage(String url){
         driver.get(url);
     }
@@ -39,7 +42,7 @@ public class PensionWiseHomePage {
                 action.moveToElement(pensionDetails).click(pensionType).build().perform();
             }
             else if (serviceType.equals("Check how much is in your pot")){
-                //action.moveToElement().click().build().perform();TBC
+                action.moveToElement(pensionDetails).click(yourPot).build().perform();
             }
         }
         else if (mainTab.equals("Taking your pension money")){

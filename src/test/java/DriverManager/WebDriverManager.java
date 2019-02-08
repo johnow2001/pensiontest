@@ -40,7 +40,10 @@ public class WebDriverManager {
 
             case FIREFOX:
                 driver = new FirefoxDriver();
+
+            default: throw new RuntimeException("No matching browser found");
         }
+
 
         Boolean maxSize = FileReaderManager.getInstance().getConfigReader().getWindowMaxSize();
         if (maxSize) {

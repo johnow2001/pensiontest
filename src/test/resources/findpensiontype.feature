@@ -35,14 +35,14 @@ Feature: Find my pension type
     Then I am on the "Sorry, you’re unable to have an appointment - Pension Wise" page
 
 
-    Scenario: Get an adjustable income
-      Given I am on the Pension Wise website home page
-      When I select the service "Taking your pension money" and "Get an adjustable income"
-      Then I am on the "Get an adjustable income - Pension Wise" page
-      When I enter "10000" in pot and "55" for age and select calculate
-      Then I get a "£2,500 tax free" amount
+  Scenario: Get an adjustable income
+    Given I am on the Pension Wise website home page
+    When I select the service "Taking your pension money" and "Get an adjustable income"
+    Then I am on the "Get an adjustable income - Pension Wise" page
+    When I enter "10000" in pot and "55" for age and select calculate
+    Then I get a "£2,500 tax free" amount
 
-  @JO
+
   Scenario: Find my pension type, expect defined contribution
     Given I am on the Pension Wise website home page
     When I select the service "Your pension details" and "Find out your pension type"
@@ -55,3 +55,28 @@ Feature: Find my pension type
     #need a new page for this as its not the same one
     And I select answer "Yes" to list of pension providers
     Then Pension type is a "defined contribution pension"
+
+  @JO
+  Scenario: Find lost pension
+    Given I am on the Pension Wise website home page
+    When I select the service "Your pension details" and "Check how much is in your pot"
+    Then I am on the "Check how much is in your pension pot - Pension Wise" page
+    When I select find a lost pension
+    Then I am on the "Find pension contact details - GOV.UK" page
+    When I select start Now
+    Then I am on the "Before you start - Find pension contact details" page
+    When I click I agree - start my search
+    Then I am on the "What type of pension are you looking for? - Find pension contact details" page
+    And I select looking for pension type of "Personal pension"
+    And I select Continue
+    Then I am on the "Find pension contact details" page
+    And I enter "Aegon" into scheme name search box and click search
+    Then I am on the "Search results for 'Aegon' -Find pension contact details" page
+    Then I find pension provide "Aegon" listed on the page
+    Then I find the following providers in list
+      | name                    |
+      | Aegon                   |
+      | Aegon UK                |
+      | ReAssure Limited        |
+      | Arthur Hough & Sons Ltd |
+

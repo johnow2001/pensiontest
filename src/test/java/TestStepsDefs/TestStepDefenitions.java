@@ -18,7 +18,6 @@ import PageManager.*;
 import PageObjects.*;
 
 
-
 public class TestStepDefenitions {
 
     private PageManager pMgr;
@@ -36,13 +35,20 @@ public class TestStepDefenitions {
     private WebDriverManager drvMan;
     private EmployerListQuestionPage empList;
     private IsYoutProviderListedPage listProvider;
+    private CheckHowMuchInPotPage potPage;
+    private StartFindPensionContactPage findDetails;
+    private BeforeYouStartSearchPage before;
+    private TypeOfPensionYouAreLookingForPage lookFor;
+    private FindYourPensionProviderPage pensionProvider;
+    private SearchResultsPage results;
 
     @Before
-    public void before(){
+    public void before() {
 
         drvMan = new WebDriverManager();
         WebDriver driver = drvMan.getWebDriver();
         helper = new HelpUtility(driver);
+        helper.writetoFileOldMethod();
         pMgr = new PageManager(driver);
     }
 
@@ -53,7 +59,7 @@ public class TestStepDefenitions {
     }
 
     @When("^I select the service \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void selectPensionService(String mainTab, String serviceType){
+    public void selectPensionService(String mainTab, String serviceType) {
         homePage.selectService(mainTab, serviceType);
     }
 
@@ -63,112 +69,161 @@ public class TestStepDefenitions {
     }
 
     @When("^I click Start Now$")
-    public void startNow(){
+    public void startNow() {
         pensionType = pMgr.getPensionType();
         pensionType.clickStart();
     }
 
     @And("^I select answer \"([^\"]*)\"$")
-    public void selectAnswer(String answer){
+    public void selectAnswer(String answer) {
         employQuestions = pMgr.getEmployerQuestions();
         employQuestions.answerEmployer(answer);
     }
 
     @And("^I select Next Step$")
-    public void nextStep(){
+    public void nextStep() {
         employQuestions.clickNextStep();
     }
 
     @Then("^Pension type is a \"([^\"]*)\"$")
-    public void expectedPensionType(String pensionType){
+    public void expectedPensionType(String pensionType) {
         dcType = pMgr.getDefContPage();
         assertTrue(dcType.getType().contains(pensionType));
     }
 
     @When("^I book and appointment$")
-    public void bookAppointment(){
+    public void bookAppointment() {
         dcType = pMgr.getDefContPage();
         dcType.bookAppointment();
     }
 
     @When("^I select book a face to face appointment$")
-    public void bookFaceToFaceAppt(){
+    public void bookFaceToFaceAppt() {
         beforeBooking = pMgr.getBeforeYouBookPage();
         beforeBooking.bookFaceToFaceAppt();
     }
 
     @When("^I enter a postcode of \"([^\"]*)\" and select search$")
-    public void enterPostCode(String postCode){
+    public void enterPostCode(String postCode) {
         findLoc = pMgr.getLocationPage();
         findLoc.enterPostCode(postCode);
     }
 
     @Then("^I can see \"([^\"]*)\" in the list$")
-    public void checkLocationPresent(String location){
+    public void checkLocationPresent(String location) {
         nearYou = pMgr.getLocNearYou();
         assertTrue(nearYou.checkLocation(location));
     }
 
     @When("^I select book online$")
-    public void bookOnline(){
+    public void bookOnline() {
         nearYou = pMgr.getLocNearYou();
         nearYou.bookOnline();
     }
 
     @When("^I enter a date of \"([^\"]*)\"$")
-    public void enterApptDate(String date){
+    public void enterApptDate(String date) {
         bookings = pMgr.getBookingsPage();
         bookings.selectCalendarDate(date);
     }
 
     @When("^I enter a a time of \"([^\"]*)\"$")
-    public void setApptTime(String time){
+    public void setApptTime(String time) {
         bookings = pMgr.getBookingsPage();
         bookings.setTime(time);
     }
 
     @When("^I select continue$")
-    public void clickContinue(){
+    public void clickContinue() {
         bookings = pMgr.getBookingsPage();
         bookings.selectContinue();
     }
 
     @When("^I enter my details$")
-    public void enterMyDetails(DataTable data){
+    public void enterMyDetails(DataTable data) {
         details = pMgr.getDetailsPage();
         details.setDetails(data);
     }
 
     @When("^select submit booking request$")
-    public void submitBooking(){
+    public void submitBooking() {
         details = pMgr.getDetailsPage();
         details.submitBookingReq();
     }
 
     @When("^I enter \"([^\"]*)\" in pot and \"([^\"]*)\" for age and select calculate$")
-    public void calculateAdjustableIncome(String potValue, String age){
+    public void calculateAdjustableIncome(String potValue, String age) {
         adjIncome = pMgr.getAdjustableIncomePage();
         adjIncome.calculateAdjustableIncome(potValue, age);
     }
 
     @Then("^I get a \"([^\"]*)\" amount$")
-    public void checktaxFreeAmount(String expectedAmount){
+    public void checktaxFreeAmount(String expectedAmount) {
         adjIncome = pMgr.getAdjustableIncomePage();
         assertTrue(adjIncome.checkTaxFreeAmount(expectedAmount));
     }
 
     @And("^I select answer \"([^\"]*)\" to employer list question$")
-    public void answerToEmployerList(String answer){
+    public void answerToEmployerList(String answer) {
         empList = pMgr.getEmpListpage();
         empList.selecAnswer(answer);
         empList.selectNextStep();
     }
 
     @And("^I select answer \"([^\"]*)\" to list of pension providers$")
-    public void anserToProviderList(String answer){
+    public void anserToProviderList(String answer) {
         listProvider = pMgr.getProviderListPage();
         listProvider.selecAnswer(answer);
         listProvider.selectNextStep();
+    }
+
+    @When("^I select find a lost pension$")
+    public void findLostPension() {
+        potPage = pMgr.getPensionPotPage();
+        potPage.selectLostPensionLink();
+    }
+
+    @When("^I select start Now$")
+    public void startFindPensionContactDetails() {
+        findDetails = pMgr.getFindPensionContactPage();
+        findDetails.startFindPensionContactDetails();
+    }
+
+    @When("^I click I agree - start my search$")
+    public void agreeStartMySearch() {
+        before = pMgr.getBeforeYouStartSearchPage();
+        before.clickStartMySearch();
+    }
+
+    @Then("^I select looking for pension type of \"([^\"]*)\"$")
+    public void lokkingForPensionType(String pensionType) {
+        lookFor = pMgr.getTypeOfPensionYouAreLookingForPage();
+        lookFor.selectPensionType(pensionType);
+    }
+
+    @Then("^I select Continue$")
+    public void continuelookForPension() {
+        lookFor = pMgr.getTypeOfPensionYouAreLookingForPage();
+        lookFor.selectContinue();
+    }
+
+    @Then("^I enter \"([^\"]*)\" into scheme name search box and click search$")
+    public void findPensionProvider(String provider) {
+        pensionProvider = pMgr.getFindYourPensionProviderPage();
+        pensionProvider.searchPensionProvide(provider);
+    }
+
+    @Then("^I find pension provide \"([^\"]*)\" listed on the page$")
+    public void checkProviderPresentOnPage(String expectedProvider) {
+        results = pMgr.getSearchResultsPage();
+        assertTrue(results.isPensionProviderInList(expectedProvider));
+
+    }
+
+    @Then("^I find the following providers in list$")
+    public void checkForSpecificProviders(DataTable data) {
+        results = pMgr.getSearchResultsPage();
+        assertTrue(results.isSpecificProvidersListed(data));
     }
 
     @After
