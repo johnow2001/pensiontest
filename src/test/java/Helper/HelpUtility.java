@@ -182,11 +182,38 @@ public class HelpUtility {
 
             String line;
             while ((line = br.readLine()) != null){
-                System.out.println(line);
+                //System.out.println(line);
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
+
+    public void  doCompare(){
+        TreeSet<LocalDateTime> ts = new TreeSet<>(new MyCompare());
+        for(int i=0; i<20; i++) {
+            LocalDateTime ldt = LocalDateTime.now();
+            Random r = new Random(10);
+            ts.add(ldt.plusSeconds(r.nextInt(10)));
+            ts.add(ldt.minusSeconds(r.nextInt(1000)));
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+            }
+        }
+
+         for(LocalDateTime time : ts){
+             String t = time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+             System.out.println(t);
+         }
+    }
+}
+
+
+class MyCompare implements Comparator<LocalDateTime>{
+    public int compare(LocalDateTime a, LocalDateTime b){
+        return b.compareTo(a);
+    }
+
 }

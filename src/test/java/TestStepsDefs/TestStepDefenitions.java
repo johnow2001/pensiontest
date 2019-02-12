@@ -48,7 +48,7 @@ public class TestStepDefenitions {
         drvMan = new WebDriverManager();
         WebDriver driver = drvMan.getWebDriver();
         helper = new HelpUtility(driver);
-        helper.writetoFileOldMethod();
+        helper.doCompare();
         pMgr = new PageManager(driver);
     }
 

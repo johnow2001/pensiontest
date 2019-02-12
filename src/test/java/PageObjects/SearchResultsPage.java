@@ -5,8 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,6 +45,7 @@ public class SearchResultsPage {
         List<Map<String, String>> map = table.asMaps(String.class, String.class);
         List<WebElement> aTag = driver.findElements(By.tagName("a"));
 
+
         /*
         for(WebElement e : aTag){
             for (Map<String, String> l : map) {
@@ -53,6 +58,13 @@ public class SearchResultsPage {
                 }
             }
         } */
+
+
+        for(Map<String, String> m : map){
+            String v = m.get("name");
+            System.out.println(m.keySet());
+            System.out.println(m.toString() + "size = " + m.size());
+        }
 
         String expected[] = new String[map.size()];
         int i =0;
@@ -87,4 +99,6 @@ public class SearchResultsPage {
         */
 
     }
+
+
 }
